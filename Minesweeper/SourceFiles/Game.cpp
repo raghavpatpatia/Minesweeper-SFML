@@ -1,39 +1,51 @@
 #include "Game.hpp"
 
-Game::Game() : window(VideoMode(680, 380), "SFML Application"), player()
+void Game::CreateWindow()
 {
-	player.setRadius(100.f);
-	player.setFillColor(Color::Cyan);
-	player.setPosition(50.f, 50.f);
+	window = new RenderWindow(screenSize, "MINESWEEPER");
+	window->setFramerateLimit(30);
+}
+
+void Game::UpdateAll()
+{
+	Event e;
+	while(window->pollEvent(e))
+	{
+		if (e.type == Event::Closed || Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			window->close();
+		}
+	}
+	controller->Update();
+}
+
+void Game::RenderAll()
+{
+	window->clear(screenBgColor);
+	controller->Render();
+	window->display();
+}
+
+Game::Game()
+{
+	screenBgColor = Color(20, 20, 20, 225);
+	screenSize.width = 800;
+	screenSize.height = 900;
+	CreateWindow();
+	controller = new StateController(window);
+}
+
+Game::~Game()
+{
+	delete window;
+	delete controller;
 }
 
 void Game::Run()
 {
-	while (window.isOpen())
+	while(window->isOpen())
 	{
-		ProcessEvents();
-		Update();
-		Render();
+		UpdateAll();
+		RenderAll();
 	}
-}
-
-void Game::ProcessEvents()
-{
-	Event event;
-	while (window.pollEvent(event))
-	{
-		if (event.type == Event::Closed)
-		{
-			window.close();
-		}
-	}
-}
-
-void Game::Update() {}
-
-void Game::Render()
-{
-	window.clear();
-	window.draw(player);
-	window.display();
 }
