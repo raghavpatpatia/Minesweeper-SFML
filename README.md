@@ -2,7 +2,7 @@
 
 Welcome to the classic Minesweeper game! This repository contains the source code for a Minesweeper game implemented in C++ with SFML.
 
-[![YouTube Thumbnail](thumbnail.png)](https://youtu.be/dIYr2KqRZmQ)
+[![YouTube Thumbnail](https://img.youtube.com/vi/dIYr2KqRZmQ/0.jpg)](https://www.youtube.com/watch?v=dIYr2KqRZmQ)
 
 ## Overview
 
